@@ -1,2 +1,4 @@
-# MultiMazeGame
-A multimaze playing game powered by unity
+# VR-MultiMazeGame
+A multimaze playing VR game powered by unity
+
+Currently Supports openVR
