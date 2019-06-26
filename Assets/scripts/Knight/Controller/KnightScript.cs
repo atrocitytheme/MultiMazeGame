@@ -4,40 +4,42 @@ using UnityEngine;
 using Commands;
 public class KnightScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     float rotSpeed = 4;
-    float gravity = 4;
-    float rotation = 0;
+/*    float gravity = 4;
+*/    float rotation = 0;
+    Vector3 cache = Vector3.zero;
 
-    Vector3 moveDir = Vector3.zero;
+    public GameObject headSetPosition;
 
-    CharacterController controller;
-
-    Animator anime;
-    private Commander commander;
+    /*    Vector3 moveDir = Vector3.zero;
+    */
+    /*    CharacterController controller;*/
+    /*
+        Animator anime;
+        private Commander commander;*/
 
     bool isLookUp = false;
-    bool shouldJump = true;
+/*    bool shouldJump = true;
+*/
+    /*    public bool ShouldJump {
+            get {
+                return shouldJump;
+            }
 
-    public bool ShouldJump {
-        get {
-            return shouldJump;
-        }
-
-        set {
-            shouldJump = value;
-        }
-    }
+            set {
+                shouldJump = value;
+            }
+        }*/
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        anime = GetComponent<Animator>();
+/*        controller = GetComponent<CharacterController>();
+        anime = GetComponent<Animator>();*/
     }
 
     private void Update()
     {
-        if (true) {
+/*        if (true) {
             if (Input.GetKey("w")) {
                 commander = new ForwardCommander(anime, controller, transform);
                 commander.Run();
@@ -63,26 +65,40 @@ public class KnightScript : MonoBehaviour
                 commander.Cancel();
             }
 
-        }
-        rotation += Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
+        }*/
+      /*  rotation += Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime;
         if (!isLookUp)
-        transform.eulerAngles = new Vector3(0, 10*rotation, 0);
+        transform.eulerAngles = new Vector3(0, 10*rotation, 0);*/
     }
 
-    IEnumerator Attack() {
-        anime.SetBool("attackTimeout", false);
-        yield return new WaitForSeconds(1f);
-        anime.SetInteger("condition", 2);
-        yield return new WaitForSeconds(0.01f);
-        int state = (anime.GetInteger("condition") != 0) ? 1 : 0;
-        anime.SetInteger("condition", state);
-        anime.SetBool("attackTimeout", true);
+    /*    IEnumerator Attack() {
+            anime.SetBool("attackTimeout", false);
+            yield return new WaitForSeconds(1f);
+            anime.SetInteger("condition", 2);
+            yield return new WaitForSeconds(0.01f);
+            int state = (anime.GetInteger("condition") != 0) ? 1 : 0;
+            anime.SetInteger("condition", state);
+            anime.SetBool("attackTimeout", true);
+        }*/
+    /*
+        public IEnumerator Jump() {
+            shouldJump = false;
+            GetComponent<CharacterController>().Move(new Vector3(0, 200, 0) * Time.deltaTime);
+            yield return new WaitForSeconds(1f);
+            shouldJump = true;
+        }*/
+
+    public void UpdateAngel(float angelChanged) {
+        rotation =  2 * angelChanged * rotSpeed;
+        cache = new Vector3(0, rotation, 0);
+        transform.Rotate(cache, Space.World);
     }
 
-    public IEnumerator Jump() {
-        shouldJump = false;
-        GetComponent<CharacterController>().Move(new Vector3(0, 200, 0) * Time.deltaTime);
-        yield return new WaitForSeconds(1f);
-        shouldJump = true;
+    public void SyncWithHeadSet() {
+        transform.rotation = headSetPosition.transform.rotation;
+    }
+
+    public void Refresh() {
+        
     }
 }

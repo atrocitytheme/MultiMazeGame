@@ -1,0 +1,15 @@
+Library/*
+Logs/*
+Temp/*
+obj/*
+*~
+*.csproj
+*.sln
+*.suo
+*.userprefs
+*.app
+.idea/
+*.VC.*
+*.swp
+*.log
+*.pyc
