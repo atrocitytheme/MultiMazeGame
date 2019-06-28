@@ -14,6 +14,8 @@ TagManager:
   - enemy
   - test
   - ammo
+  - wall
+  - hands
   layers:
   - Default
   - TransparentFX
